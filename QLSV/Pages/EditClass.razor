@@ -1,0 +1,37 @@
+﻿@using QLSV.Data
+@inject NavigationManager Navigation
+<Form Model="EditModel">
+    <Template style="height:90%">
+        <Row Gutter="16">
+            <AntDesign.Col Span="6">
+
+            </AntDesign.Col>
+            <AntDesign.Col Span="20">
+                <Text>Tên lớp:</Text>
+                <Input @bind-Value="@EditModel.Name" Style="text-align: left;" />
+            </AntDesign.Col>
+            <AntDesign.Col Span="20">
+                <Text>Môn học:</Text>
+                <Input @bind-Value="@EditModel.Subject" Style="text-align: left;" />
+            </AntDesign.Col>
+            <AntDesign.Col Span="20">
+                <Text>Giáo viên:</Text>
+                <Input @bind-Value="@EditModel.TeacherId" Style="text-align: left;" />
+            </AntDesign.Col>
+
+        </Row>
+        <br />
+        <br />
+        <Row>
+            <AntDesign.Col Span="7">
+
+            </AntDesign.Col>
+            <AntDesign.Col Span="12">
+                <Button Type="default" OnClick="Cancel">Cancel</Button>
+                <Button Type="primary" OnClick="UpdateClass">Submit</Button>
+            </AntDesign.Col>
+        </Row>
+    </Template>
+</Form>
+
+

@@ -11,7 +11,7 @@ namespace GrpcService.Models.Mappings
             Id(x => x.ID, m => m.Column("ID"));
             Property(x => x.Name);
             Property(x => x.Subject);
-            ManyToOne(x => x.Teacher, m => m.Column("Teacher"));
+            ManyToOne(x => x.Teacher, m => m.Column("TeacherId"));
             Bag(x => x.Students, c =>
             {
                 c.Key(k => k.Column("Class"));

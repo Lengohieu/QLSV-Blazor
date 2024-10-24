@@ -26,7 +26,7 @@ namespace GrpcService
             var mapper = new ModelMapper();
             mapper.AddMapping(typeof(StudentMapping));
             mapper.AddMapping(typeof(TeacherMapping));
-            mapper.AddMapping(typeof(Models.Mappings.ClassMapping));
+            mapper.AddMapping(typeof(ClassMapping));
             HbmMapping domainMapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
             cfg.AddMapping(domainMapping);
             return cfg.BuildSessionFactory();

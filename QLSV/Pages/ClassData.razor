@@ -1,0 +1,46 @@
+﻿@page "/class"
+@using QLSV.Data
+@using System.ComponentModel
+@using AntDesign.TableModels
+@using BlazorInputFile
+<PageTitle>Class</PageTitle>
+<div style="display: flex; align-items: center">
+    <Button Type="primary" @onclick="AddClass" Style="margin-right:10px">Thêm</Button>
+    @*<BlazorInputFile.InputFile OnChange="LoadFile"></InputFile>*@
+</div>
+<br>
+<Form Model="@taskSearchClasss" Style="display:flex; margin-top: 10px"
+      OnFinish="Search">
+    <FormItem Style="width: 70%">
+        <Input @bind-Value="@context.Name" />
+    </FormItem>
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Tìm kiếm
+        </Button>
+    </FormItem>
+</Form>
+
+<div>
+</div>
+
+<Table DataSource="classsViewModels" PageSize="10" Loading="@loading">
+    <Column @bind-Field="context.stt" Sortable></Column>
+    <Column @bind-Field="context.Name" Sortable></Column>
+    <Column @bind-Field="context.Subject" Sortable></Column>
+    <Column @bind-Field="context.TeacherId" Sortable></Column>
+    <ActionColumn Title="Hành động">
+        <Icon Type="edit" Theme="outline" @onclick="() => Edit(context)" Width="20" Height="20" Style="margin-right: 10px" />
+        <Popconfirm Title="Xác nhận xóa?"
+                    OnConfirm="()=> DeleteClass(context)"
+                    OkText="Có"
+                    CancelText="Không">
+            <Icon Type="delete" Theme="outline" Width="20" Height="20" />
+        </Popconfirm>
+    </ActionColumn>
+</Table>
+
+<Drawer Closable="true" Visible="visible" Placement="right" Width=500 Title='("Lớp học")' OnClose="() => visible = false">
+    <EditClass @ref="editClass" Cancel="() => visible = false" ValueChange="Save"></EditClass>
+</Drawer>
+

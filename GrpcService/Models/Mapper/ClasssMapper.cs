@@ -9,15 +9,16 @@ namespace GrpcService.Models.Mapper
         {
             ClassGrpc classGrpc = new ClassGrpc();
             classGrpc.Id = _class.ID;
-            classGrpc.ClassName = _class.Name;
+            classGrpc.Name = _class.Name;
             classGrpc.Subject = _class.Subject;
+            classGrpc.TeacherId = _class.TeacherId;
             return classGrpc;
         }
         public Class ClassGrpcToClass(ClassGrpc classGrpc)
         {
             Class _class = new Class();
             _class.ID = classGrpc.Id;
-            _class.Name = classGrpc.ClassName;
+            _class.Name = classGrpc.Name;
             _class.Subject = classGrpc.Subject;
             return _class;
         }

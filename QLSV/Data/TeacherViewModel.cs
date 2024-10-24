@@ -2,7 +2,7 @@
 
 namespace QLSV.Data
 {
-    public class StudentViewModel
+    public class TeacherViewModel
     {
         public string ID { get; set; }
         [Display(Name = "STT")]
@@ -13,12 +13,6 @@ namespace QLSV.Data
 
         [Display(Name = "Ngày sinh")]
         public DateTime DateOfBirth { get; set; }
-
-        [Display(Name = "Địa chỉ")]
-        public string Address { get; set; }
-
-        [Display(Name = "Lớp học")]
-        public int RoomClass { get; set; }
 
     }
 }

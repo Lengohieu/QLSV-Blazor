@@ -4,6 +4,8 @@ using GrpcService.Models.Entity;
 using Share;
 using GrpcService.Models;
 using GrpcService.Models.Mapper;
+using NHibernate.Engine;
+using AutoMapper;
 
 namespace GrpcService.Services
 {
@@ -11,18 +13,18 @@ namespace GrpcService.Services
     {
         private readonly ILogger<GreeterService> _logger;
         private readonly IStudentRepository _studentRepository;
+        private readonly IMapper _mapper;
 
-        StudentMapper studentMapper = new StudentMapper();
-
-        public StudentService(ILogger<GreeterService> logger, IStudentRepository studentRepository)
+        public StudentService(IMapper mapper, ILogger<GreeterService> logger, IStudentRepository studentRepository)
         {
+            _mapper = mapper;
             _logger = logger;
             _studentRepository = studentRepository;
         }
 
         public BooleanGrpc AddNewStudent(StudentGrpc request, CallContext context = default)
         {
-            Student student = studentMapper.ClassGrpcToClass(request);
+            Student student = _mapper.Map<Student>(request);
             BooleanGrpc booleanGrpc = new BooleanGrpc();
             booleanGrpc.Empty = new Empty();
             booleanGrpc.Result = _studentRepository.AddNewStudent(student);
@@ -31,7 +33,7 @@ namespace GrpcService.Services
 
         public BooleanGrpc DeleteStudent(StudentGrpc request, CallContext context = default)
         {
-            Student student = studentMapper.ClassGrpcToClass(request);
+            Student student = _mapper.Map<Student>(request);
             BooleanGrpc booleanGrpc = new BooleanGrpc();
             booleanGrpc.Empty = new Empty();
             booleanGrpc.Result = _studentRepository.RemoveStudent(student);
@@ -44,7 +46,7 @@ namespace GrpcService.Services
             List<Student> students = _studentRepository.GetListStudents();
             foreach (Student student in students)
             {
-                StudentGrpc studentGrpc = studentMapper.ClassToClassGrpc(student);
+                StudentGrpc studentGrpc = _mapper.Map<StudentGrpc>(student);
                 listStudent.Students.Add(studentGrpc);
             }
             return listStudent;
@@ -56,7 +58,7 @@ namespace GrpcService.Services
             List<Student> students = _studentRepository.GetStudentBySearch(pageViewGrpc);
             foreach (Student student in students)
             {
-                StudentGrpc studentGrpc = studentMapper.ClassToClassGrpc(student);
+                StudentGrpc studentGrpc = _mapper.Map<StudentGrpc>(student);
                 listStudent.Students.Add(studentGrpc);
             }
             return listStudent;
@@ -78,7 +80,7 @@ namespace GrpcService.Services
                 resultGrpc.PageSize = resultGrpc.PageSize;
                 foreach (var item in result.Data)
                 {
-                    StudentGrpc studentGrpc = studentMapper.ClassToClassGrpc(item);
+                    StudentGrpc studentGrpc = _mapper.Map<StudentGrpc>(item);
                     resultGrpc.Students.Add(studentGrpc);
                 }
                 return resultGrpc;
@@ -96,7 +98,7 @@ namespace GrpcService.Services
             {
                 StudentGrpc studentGrpc = new StudentGrpc();
                 Student student = _studentRepository.FindStudentById(request.Id);
-                studentGrpc = studentMapper.ClassToClassGrpc(student);
+                studentGrpc = _mapper.Map<StudentGrpc>(student);
                 return studentGrpc;
             }
             catch (Exception ex)
@@ -107,7 +109,7 @@ namespace GrpcService.Services
 
         public BooleanGrpc UpdateStudent(StudentGrpc request, CallContext context = default)
         {
-            Student student = studentMapper.ClassGrpcToClass(request);
+            Student student = _mapper.Map<Student>(request);
             BooleanGrpc booleanGrpc = new BooleanGrpc();
             booleanGrpc.Empty = new Empty();
             booleanGrpc.Result = _studentRepository.UpdateStudentInfor(student);

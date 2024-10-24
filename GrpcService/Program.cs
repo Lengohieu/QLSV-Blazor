@@ -2,6 +2,9 @@ using GrpcService.Services;
 using GrpcService;
 using NHibernate;
 using ProtoBuf.Grpc.Server;
+using GrpcService.Models.Mapper;
+using GrpcService.Repository.Interface;
+using GrpcService.Repository;
 
 namespace GrpcService
 {
@@ -17,12 +20,14 @@ namespace GrpcService
             builder.Services.AddSingleton<ISessionFactory>(NHibernateConfig.BuildSessionFactory());
             builder.Services.AddSingleton<IStudentRepository, StudentRepository>();
             builder.Services.AddSingleton<IClassRepository, ClassRepository>();
-
+            builder.Services.AddSingleton<ITeacherRepository, TeacherRepository>();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             var app = builder.Build();
 
             app.MapGrpcService<GreeterService>();
             app.MapGrpcService<StudentService>();
             app.MapGrpcService<ClassService>();
+            app.MapGrpcService<TeacherService>();
 
 
             // Configure the HTTP request pipeline.
