@@ -6,6 +6,7 @@ namespace QLSV.Pages
     {
         [Parameter] public EventCallback Cancel { get; set; }
         [Parameter] public EventCallback<Class> ValueChange { get; set; }
+        [Parameter] public List<TeacherViewModel> teacherViewModels { get; set; }
         ClassEditModel EditModel { get; set; } = new ClassEditModel();
 
         public void LoadData(Class class1)

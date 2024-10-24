@@ -1,4 +1,5 @@
-﻿using BlazorInputFile;
+﻿using AutoMapper;
+using BlazorInputFile;
 using Microsoft.AspNetCore.Components;
 using Microsoft.IdentityModel.Tokens;
 using QLSV.Data;
@@ -7,10 +8,12 @@ namespace QLSV.Pages
 {
     public partial class ClassData : ComponentBase
     {
+        [Inject] IMapper Mapper { get; set; }
         [Inject] IClassService ClassService { get; set; }
         [Inject] ITeacherService TeacherService { get; set; }
         List<Class> classs { get; set; }
         List<ClassViewModel> classsViewModels { get; set; }
+        List<TeacherViewModel> teacherViewModels { get; set; }
         EditClass editClass = new EditClass();
         TaskSearchClass taskSearchClasss = new TaskSearchClass();
         bool visible = false;
@@ -20,7 +23,21 @@ namespace QLSV.Pages
         {
             classsViewModels = new();
             classs = new();
+            await LoadTeacherDataAsync();
             await LoadAsync();
+        }
+
+        public async Task LoadTeacherDataAsync()
+        {
+            try
+            {
+                List<Teacher> teacherDatas = await TeacherService.GetAllTeachers();
+                teacherViewModels = Mapper.Map<List<TeacherViewModel>>(teacherDatas) ?? new List<TeacherViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task LoadAsync()
@@ -46,6 +63,7 @@ namespace QLSV.Pages
                 model.ID = c.ID;
                 model.Name = c.Name;
                 model.Subject = c.Subject;
+                model.TeacherName = teacherViewModels?.FirstOrDefault(x => x.ID == c.TeacherId)?.Name;
 
                 models.Add(model);
                 stt++;

@@ -10,6 +10,8 @@ namespace QLSV.Mapper
         {
             CreateMap<Teacher, TeacherGrpc>().ReverseMap();
             CreateMap<Class, ClassGrpc>().ReverseMap();
+            CreateMap<Teacher, TeacherViewModel>().ReverseMap();
+            CreateMap<Class, ClassViewModel>().ReverseMap();
         }
     }
 }

@@ -28,7 +28,7 @@
     <Column @bind-Field="context.stt" Sortable></Column>
     <Column @bind-Field="context.Name" Sortable></Column>
     <Column @bind-Field="context.Subject" Sortable></Column>
-    <Column @bind-Field="context.TeacherId" Sortable></Column>
+    <Column @bind-Field="context.TeacherName" Sortable></Column>
     <ActionColumn Title="Hành động">
         <Icon Type="edit" Theme="outline" @onclick="() => Edit(context)" Width="20" Height="20" Style="margin-right: 10px" />
         <Popconfirm Title="Xác nhận xóa?"
@@ -41,6 +41,6 @@
 </Table>
 
 <Drawer Closable="true" Visible="visible" Placement="right" Width=500 Title='("Lớp học")' OnClose="() => visible = false">
-    <EditClass @ref="editClass" Cancel="() => visible = false" ValueChange="Save"></EditClass>
+    <EditClass @ref="editClass" Cancel="() => visible = false" ValueChange="Save" teacherViewModels="teacherViewModels"></EditClass>
 </Drawer>
 

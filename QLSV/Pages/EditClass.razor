@@ -16,7 +16,15 @@
             </AntDesign.Col>
             <AntDesign.Col Span="20">
                 <Text>Giáo viên:</Text>
-                <Input @bind-Value="@EditModel.TeacherId" Style="text-align: left;" />
+                <Select TItem="string" TItemValue="string" @bind-Value="EditModel.TeacherId">
+                    <SelectOptions>
+                        @foreach (var item in teacherViewModels)
+                        {
+                            <SelectOption TItemValue="string" TItem="string" Value="@item.ID" Label="@item.Name" />
+                        }
+                    </SelectOptions>
+                </Select>
+                @* <Input @bind-Value="@EditModel.TeacherId" Style="text-align: left;" /> *@
             </AntDesign.Col>
 
         </Row>

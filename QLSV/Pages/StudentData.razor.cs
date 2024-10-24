@@ -1,4 +1,5 @@
-﻿using BlazorInputFile;
+﻿using AutoMapper;
+using BlazorInputFile;
 using Microsoft.AspNetCore.Components;
 using Microsoft.IdentityModel.Tokens;
 using QLSV.Data;
@@ -7,9 +8,12 @@ namespace QLSV.Pages
 {
     public partial class StudentData : ComponentBase
     {
+        [Inject] IMapper Mapper { get; set; }
         [Inject] IStudentService StudentService { get; set; }
+        [Inject] IClassService ClassService { get; set; }
         List<Student> students { get; set; }
         List<StudentViewModel> studentsViewModels { get; set; }
+        List<ClassViewModel> classViewModels { get; set; }
         EditStudent editStudent = new EditStudent();
         TaskSearchStudent taskSearchStudents = new TaskSearchStudent();
         bool visible = false;
@@ -19,7 +23,22 @@ namespace QLSV.Pages
         {
             studentsViewModels = new();
             students = new();
+            await LoadClassAsync();
             await LoadAsync();
+        }
+
+        public async Task LoadClassAsync()
+        {
+            try
+            {
+                var classDatas = await ClassService.GetAllClasss();
+
+                classViewModels = Mapper.Map<List<ClassViewModel>>(classDatas) ?? new List<ClassViewModel>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task LoadAsync()
@@ -28,7 +47,7 @@ namespace QLSV.Pages
             studentsViewModels.Clear();
             //await Task.Delay(3000);
             students = await StudentService.GetAllStudents();
-            studentsViewModels = GetViewModels(students);
+            studentsViewModels = GetViewModels(students).OrderBy(c => c.Name).ToList();
             loading = false;
             StateHasChanged();
         }
@@ -46,7 +65,7 @@ namespace QLSV.Pages
                 model.Name = c.Name;
                 model.DateOfBirth = c.DateOfBirth;
                 model.Address = c.Address;
-
+                model.RoomClassName = classViewModels?.FirstOrDefault(x => x.ID == c.ClassId)?.Name;
                 models.Add(model);
                 stt++;
             });
@@ -56,6 +75,7 @@ namespace QLSV.Pages
         void AddStudent()
         {
             var studentData = new Student();
+            studentData.DateOfBirth = DateTime.Now;
             ShowStudentDetail(studentData);
         }
 

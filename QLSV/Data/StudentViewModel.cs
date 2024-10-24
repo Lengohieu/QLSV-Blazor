@@ -18,7 +18,10 @@ namespace QLSV.Data
         public string Address { get; set; }
 
         [Display(Name = "Lớp học")]
-        public int RoomClass { get; set; }
+        public string RoomClass { get; set; }
+
+        [Display(Name = "Lớp học")]
+        public string RoomClassName { get; set; }
 
     }
 }

@@ -19,7 +19,7 @@ internal class ClassRepository : IClassRepository
             {
                 try
                 {
-                    class1.TeacherId = Guid.NewGuid().ToString();
+                    //class1.TeacherId = Guid.NewGuid().ToString();
                     session.Save(class1);
                     transaction.Commit();
                     return true;

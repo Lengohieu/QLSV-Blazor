@@ -15,7 +15,11 @@ namespace QLSV.Data
         public string Subject { get; set; }
 
         [Display(Name = "Giáo viên")]
-        public int TeacherId { get; set; }
+        public string TeacherId { get; set; }
+
+        
+        [Display(Name = "Giáo viên")]
+        public string TeacherName { get; set; }
 
     }
 }

@@ -184,6 +184,8 @@ namespace QLSV.Data
             {
                 BooleanGrpc booleanGrpc = new BooleanGrpc();
                 StudentGrpc studentGrpc = studentMapper.MapEntityToGrpc(student);
+
+                // cấu hình để gọi grpc
                 var client = GetService();
                 booleanGrpc = client.AddNewStudent(studentGrpc);
                 return booleanGrpc.Result;

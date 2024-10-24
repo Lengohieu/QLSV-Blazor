@@ -28,7 +28,7 @@ public class StudentRepository : IStudentRepository
             {
                 try
                 {
-                    student.ClassId = Guid.NewGuid().ToString();
+                    //student.ClassId = Guid.NewGuid().ToString();
                     session.Save(student);
                     transaction.Commit();
                     return true;
@@ -91,7 +91,7 @@ public class StudentRepository : IStudentRepository
             {
                 try
                 {
-                    student.ClassId = Guid.NewGuid().ToString();
+                    //student.ClassId = Guid.NewGuid().ToString();
                     session.Update(student);
                     transaction.Commit();
                     return true;
@@ -150,14 +150,6 @@ public class StudentRepository : IStudentRepository
         {
             query = query.Where(student => student.DateOfBirth <= studentFilter.EndDate);
         }
-        //if (studentFilter.ClassId != -1)
-        //{
-        //    query = query.Where(student => student.Class.ID == studentFilter.ClassId);
-        //}
-        //if (studentFilter.Id != -1)
-        //{
-        //    query = query.Where(student => student.ID == studentFilter.Id);
-        //}
         return query;
     }
 

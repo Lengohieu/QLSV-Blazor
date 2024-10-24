@@ -36,6 +36,7 @@ namespace QLSV.Mapper
             student.Name = studentGrpc.Name;
             student.Address = studentGrpc.Address;
             student.DateOfBirth = studentGrpc.DateOfBirth;
+            student.ClassId = studentGrpc.ClassId;
             //if (student.Class == null)
             //{
             //    student.Class = new Class();
