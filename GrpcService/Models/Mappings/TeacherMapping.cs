@@ -15,12 +15,12 @@ namespace GrpcService.Models.Mappings
 
             Property(x => x.DateOfBirth);
 
-            Bag(x => x.RoomClasses, c =>
-            {
-                c.Key(k => k.Column("Teacher"));
-                c.Cascade(Cascade.All | Cascade.DeleteOrphans);
-                c.Inverse(true);
-            }, r => r.OneToMany());
+            //Bag(x => x.RoomClasses, c =>
+            //{
+            //    c.Key(k => k.Column("Teacher"));
+            //    c.Cascade(Cascade.All | Cascade.DeleteOrphans);
+            //    c.Inverse(true);
+            //}, r => r.OneToMany());
         }
     }
 }

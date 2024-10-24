@@ -6,18 +6,18 @@
         public virtual string Name { get; set; }
         public virtual string Subject { get; set; }
         public virtual string TeacherId { get; set; }
-        public virtual Teacher Teacher { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
-        public Class()
-        {
-
-        }
-        public Class(string ID, string Name, string Subject, Teacher teacher)
+        //public virtual Teacher Teacher { get; set; }
+        //public virtual ICollection<Student> Students { get; set; }
+        public Class(string ID, string Name, string Subject)
         {
             this.ID = ID;
             this.Name = Name;
             this.Subject = Subject;
-            this.TeacherId = teacher.ID;
+            //this.TeacherId = teacher.ID;
+        }
+        public Class()
+        {
+
         }
     }
 }

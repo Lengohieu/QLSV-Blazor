@@ -80,9 +80,8 @@ namespace QLSV.Pages
 
         async Task DeleteTeacher(TeacherViewModel teacherViewModel)
         {
-            Teacher studen = await TeacherService.GetTeacherByIdAsync(teacherViewModel.ID);
-            //await TeacherService.DeleteTeacherAsync(studen);
-            TeacherService.DeleteTeacher(studen);
+            Teacher teacher = await TeacherService.GetTeacherByIdAsync(teacherViewModel.ID);
+            TeacherService.DeleteTeacher(teacher);
             await LoadAsync();
         }
 

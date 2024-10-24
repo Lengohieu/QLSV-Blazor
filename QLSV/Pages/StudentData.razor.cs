@@ -82,7 +82,6 @@ namespace QLSV.Pages
         async Task DeleteStudent(StudentViewModel studentViewModel)
         {
             Student studen = await StudentService.GetStudentByIdAsync(studentViewModel.ID);
-            //await StudentService.DeleteStudentAsync(studen);
             StudentService.DeleteStudent(studen);
             await LoadAsync();
         }
