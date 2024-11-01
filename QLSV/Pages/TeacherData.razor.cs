@@ -26,9 +26,16 @@ namespace QLSV.Pages
         {
             loading = true;
             teachersViewModels.Clear();
-            //await Task.Delay(3000);
             teachers = await TeacherService.GetAllTeachers();
             teachersViewModels = GetViewModels(teachers);
+            teachersViewModels = GetViewModels(teachers).OrderBy(c => c.Name).ToList();
+            int stt = 1;
+            foreach(var i in teachersViewModels) 
+            {
+                
+                i.stt = stt++;
+            }
+
             loading = false;
             StateHasChanged();
         }
@@ -41,13 +48,11 @@ namespace QLSV.Pages
             datas.ForEach(c =>
             {
                 model = new TeacherViewModel();
-                model.stt = stt;
                 model.ID = c.ID;
                 model.Name = c.Name;
                 model.DateOfBirth = c.DateOfBirth;
 
                 models.Add(model);
-                stt++;
             });
             return models;
         }

@@ -29,7 +29,6 @@ namespace QLSV.Pages
             student.Address = EditModel.Address;
             student.ClassId = EditModel.ClassId;
 
-            //Thực hiện update sinh viên
             ValueChange.InvokeAsync(student);
         }
 

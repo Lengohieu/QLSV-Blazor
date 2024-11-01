@@ -45,9 +45,14 @@ namespace QLSV.Pages
         {
             loading = true;
             studentsViewModels.Clear();
-            //await Task.Delay(3000);
             students = await StudentService.GetAllStudents();
             studentsViewModels = GetViewModels(students).OrderBy(c => c.Name).ToList();
+            int stt = 1;
+            foreach (var i in studentsViewModels)
+            {
+
+                i.stt = stt++;
+            }
             loading = false;
             StateHasChanged();
         }
@@ -94,7 +99,6 @@ namespace QLSV.Pages
 
         async Task Edit(StudentViewModel studentViewModel)
         {
-            //var studentData = students.FirstOrDefault(c => c.Id == studentViewModel.id);
             Student student = await StudentService.GetStudentByIdAsync(studentViewModel.ID);
             ShowStudentDetail(student);
         }

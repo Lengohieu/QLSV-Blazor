@@ -24,7 +24,6 @@ namespace QLSV.Pages
             teacher.Name = EditModel.Name;
             teacher.DateOfBirth = EditModel.DateOfBirth;
 
-            //Thực hiện update sinh viên
             ValueChange.InvokeAsync(teacher);
         }
 

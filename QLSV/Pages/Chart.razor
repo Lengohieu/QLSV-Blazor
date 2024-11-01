@@ -1,0 +1,17 @@
+﻿
+@page "/Chart"
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+
+<Text>Biểu Đồ Danh Sách Sinh Viên</Text>
+<Tabs>
+    <TabPane>
+
+        <AntDesign.DatePicker @bind-Value="selectedDate" />
+
+        <AntDesign.Button @onclick="ResetData">Reset</AntDesign.Button>
+
+        <AntDesign.Charts.Column @ref="chartRef" Config="config1" Data="data1" />
+
+    </TabPane>
+    </Tabs>

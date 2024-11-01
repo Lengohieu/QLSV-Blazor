@@ -44,9 +44,15 @@ namespace QLSV.Pages
         {
             loading = true;
             classsViewModels.Clear();
-            //await Task.Delay(3000);
             classs = await ClassService.GetAllClasss();
             classsViewModels = GetViewModels(classs);
+            classsViewModels = GetViewModels(classs).OrderBy(c => c.Name).ToList();
+            int stt = 1;
+            foreach (var i in classsViewModels)
+            {
+
+                i.stt = stt++;
+            }
             loading = false;
             StateHasChanged();
         }
@@ -92,7 +98,6 @@ namespace QLSV.Pages
 
         async Task Edit(ClassViewModel classViewModel)
         {
-            //var classData = classs.FirstOrDefault(c => c.Id == classViewModel.id);
             Class class1 = await ClassService.GetClassByIdAsync(classViewModel.ID);
             ShowClassDetail(class1);
         }
@@ -100,7 +105,6 @@ namespace QLSV.Pages
         async Task DeleteClass(ClassViewModel classViewModel)
         {
             Class class1 = await ClassService.GetClassByIdAsync(classViewModel.ID);
-            //await ClassService.DeleteClassAsync(studen);
             ClassService.DeleteClass(class1);
             await LoadAsync();
         }

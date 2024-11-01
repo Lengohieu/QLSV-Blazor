@@ -8,7 +8,7 @@ namespace QLSV.Data
         [Display(Name = "STT")]
         public int stt { get; set; }
 
-        [Display(Name = "Tên sinh viên")]
+        [Display(Name = "Tên giáo viên")]
         public string Name { get; set; }
 
         [Display(Name = "Ngày sinh")]

@@ -6,7 +6,6 @@
 <PageTitle>Teacher</PageTitle>
 <div style="display: flex; align-items: center">
     <Button Type="primary" @onclick="AddTeacher" Style="margin-right:10px">Thêm</Button>
-    @*<BlazorInputFile.InputFile OnChange="LoadFile"></InputFile>*@
 </div>
 <br>
 <Form Model="@taskSearchTeachers" Style="display:flex; margin-top: 10px"
@@ -22,13 +21,6 @@
 </Form>
 
 <div>
-    @*<InputFile OnChange="LoadFile"></InputFile>*@
-    @* @if (file != null)
-    {
-    <p>Name:@file.Name</p>
-    <p>Name:@file.RelativePath</p>
-    <Button OnClick="InputFile">UpLoad</Button>
-    }*@
 </div>
 
 <Table DataSource="teachersViewModels" PageSize="10" Loading="@loading">
@@ -46,7 +38,7 @@
     </ActionColumn>
 </Table>
 
-<Drawer Closable="true" Visible="visible" Placement="right" Width=500 Title='("Sinh Viên")' OnClose="() => visible = false">
+<Drawer Closable="true" Visible="visible" Placement="right" Width=500 Title='("Giáo Viên")' OnClose="() => visible = false">
     <EditTeacher @ref="editTeacher" Cancel="() => visible = false" ValueChange="Save"></EditTeacher>
 </Drawer>
 
