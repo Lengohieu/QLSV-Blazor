@@ -139,8 +139,11 @@ namespace QLSV.Pages
         private DateTime selectedDate = DateTime.Today;
         private IChartComponent chartRef;
 
+        private bool isResetUsed = false;
         public void ResetData()
         {
+            if (isResetUsed) return;
+
             if (selectedDate.Month < 6)
             {
                 ConfigureData();
@@ -173,6 +176,8 @@ namespace QLSV.Pages
                };
                 chartRef.ChangeData(data1);
             }
+
+            isResetUsed = true;
         }
     }
 }
